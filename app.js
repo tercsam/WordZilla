@@ -1,5 +1,6 @@
 const dingSound = new Audio('Ding.mp3');
 const eraseSound = new Audio('Erase.mp3');
+const falseSound = new Audio('False.mp3'); // Nouveau son de tampon
 
 // Fonction pour jouer un son de frappe aléatoire entre Write1 et Write6
 function playRandomWriteSound() {
@@ -35,9 +36,8 @@ const wordBank = [
 'pizza', 'burger', 'pâtes', 'riz', 'salade', 'soupe', 'tarte', 'gâteau', 'glace',
 'lettre', 'mot', 'phrase', 'texte', 'poème', 'roman', 'titre',
 'jeu', 'jouet', 'puzzle', 'cartes', 'dés', 'plateau', 'score'
-
+ 
 ];
-
 
 let word = "";
 let guessedWord = [];
@@ -97,30 +97,42 @@ document.addEventListener('click', () => {
     if(!guessInput.disabled) guessInput.focus();
 });
 
-// Écouteur pour la saisie du joueur
 guessInput.addEventListener('input', (e) => {
     const char = e.target.value.toLowerCase();
     guessInput.value = ""; 
 
     if (!char.match(/[a-zà-ÿ]/i) || usedLetters.includes(char)) return;
 
-    // --- SON DE FRAPPE ALÉATOIRE ---
-    playRandomWriteSound();
-
-    paper.classList.remove('hit');
-    void paper.offsetWidth; 
-    paper.classList.add('hit');
-
     usedLetters.push(char);
 
+    // VÉRIFICATION DE LA LETTRE
     if (word.includes(char)) {
+        // --- CAS : BONNE LETTRE ---
+        playRandomWriteSound(); // Son de frappe classique
         for (let i = 0; i < word.length; i++) {
             if (word[i] === char) guessedWord[i] = char;
         }
         showMessage("CLAC !", "black");
+        
+        // Petite secousse de frappe normale
+        paper.classList.remove('hit');
+        void paper.offsetWidth; 
+        paper.classList.add('hit');
     } else {
+        // --- CAS : MAUVAISE LETTRE ---
         attempts--;
+        
+        // On joue le son de tampon (False.mp3)
+        const stampSound = falseSound.cloneNode();
+        stampSound.volume = 0.8;
+        stampSound.play().catch(() => {});
+        
         showMessage("BIP...", "var(--error-color)");
+
+        // Secousse un peu plus forte ou différente pour l'erreur
+        paper.classList.remove('hit');
+        void paper.offsetWidth; 
+        paper.classList.add('hit');
     }
 
     updateDisplay();
@@ -156,7 +168,6 @@ function triggerLoseAnimation() {
             guessedWord.pop();
             wordDisplay.textContent = guessedWord.join(' ');
             
-            // Son d'effacement répété
             const clickErase = eraseSound.cloneNode();
             clickErase.volume = 0.6;
             clickErase.play().catch(() => {});
@@ -175,11 +186,8 @@ function typeCorrectWord() {
 
     let typeInterval = setInterval(() => {
         wordDisplay.textContent += (i === 0 ? "" : " ") + word[i].toUpperCase();
-        
-        // --- SON DE FRAPPE ALÉATOIRE PENDANT LA RÉVÉLATION ---
         playRandomWriteSound();
 
-        // On ajoute aussi la petite secousse pour le réalisme
         paper.classList.remove('hit');
         void paper.offsetWidth;
         paper.classList.add('hit');
