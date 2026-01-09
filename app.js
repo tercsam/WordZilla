@@ -33,7 +33,19 @@ const wordBank = [
     'comète', 'baleine', 'requin', 'dauphin', 'poisson', 'crabe', 'pieuvre', 'raie',
     'bague', 'chapeau', 'gant', 'thé', 'jus', 'lait', 'soda', 'vin',
     'fraise', 'cerise', 'raisin', 'kiwi', 'mangue', 'melon', 'burger', 'pâtes', 'salade', 'soupe', 'tarte', 'gâteau',
-    'phrase', 'poème', 'titre', 'jouet', 'puzzle', 'cartes', 'dés', 'plateau', 'score'
+    'phrase', 'poème', 'titre', 'jouet', 'puzzle', 'cartes', 'dés', 'plateau', 'score',
+    'pixel', 'bug', 'web', 'data', 'lien', 'mail', 'puce', 'onde', 'fibre', 'laser', 'drone', 'robot', 'sonde', 'radar', 'sonar', 'moteur', 'usine', 'engin',
+     'outil', 'boulon', 'écrou', 'tube', 'tuyau', 'câble', 'fil', 'pile', 'accu', 'gaz', 'atome', 'molécule', 'noyau', 'masse', 'poids', 'force', 'vitesse', 'rayon', 
+     'angle', 'carré', 'rond', 'cube', 'cône', 'ligne', 'point', 'bord', 'face', 'coin', 'clavier', 'écran', 'unité', 'disque', 'flash', 'modem', 'micro', 'casque', 
+     'audio', 'vidéo', 'photo', 'film', 'zoom', 'flash', 'cliché', 'album', 'cadre', 'expo', 'musée', 'œuvre', 'objet', 'style', 'mode', 'tissu', 'laine', 'soie', 
+     'coton', 'cuir', 'jean', 'lin', 'velours', 'maille', 'nœud', 'lacets', 'botte', 'talon', 'gant', 'écharpe', 'bonnet', 'casque', 'casquette', 'bob', 
+     'sac', 'poche', 'zip', 'bijou', 'montre', 'pile', 'quartz', 'rubis', 'or', 'argent', 'bronze', 'fer', 'cuivre', 'étain', 'plomb', 'zinc'
+     , 'acier', 'métal', 'alliage', 'verre', 'cristal', 'silex', 'quartz', 'marbre', 'granit', 'craie', 'argile', 'plâtre', 'chaux', 'ciment',
+      'brique', 'tuile', 'dalle', 'poutre', 'planche', 'clou', 'vis', 'colle', 'vernis', 'peintre', 'maçon', 'forgeron', 'expert', 'juge', 'maire', 
+      'agent', 'soldat', 'marin', 'pilote', 'guide', 'hôte', 'client', 'voisin', 'ami', 'proche', 'parent', 'enfant', 'bébé', 'ado', 'jeune', 'vieux',
+       'homme', 'femme', 'fille', 'garçon', 'humain', 'âme', 'vie', 'mort', 'corps', 'sens', 'goût', 'odorat', 'vue', 'ouïe', 'toucher', 'voix', 'cri', 'chant', 
+       'souffle', 'geste', 'pas', 'saut', 'course', 'repos', 'pause', 'sieste', 'calme', 'bruit', 'son', 'ton', 'rythme', 'tempo', 'solo', 'duo', 'trio', 'club', 
+       'groupe', 'bande', 'tribu', 'clan', 'foule', 'peuple'
 ];
 
 let word = "";
