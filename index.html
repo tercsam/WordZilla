@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordZilla — Typewriter Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container" id="paper">
+    <div class="best-score-stamp">RECORD: <span id="best-score">0</span></div>
+    <h1>WordZilla — Machine n°1208</h1>
+
+    <div class="stats">
+        <div>TENTATIVES: <span id="attempts">10</span></div>
+        <div>SCORE: <span id="score">0</span></div>
+    </div>
+
+    <div id="word-display">_ _ _ _</div>
+
+    <div id="game-controls">
+        <input type="text" id="guess-input" maxlength="1" autofocus autocomplete="off">
+        <p id="message"></p>
+    </div>
+
+    <div id="result-screen" class="hidden">
+        <button onclick="initGame()">🔄 NOUVELLE FEUILLE (Ding!)</button>
+    </div>
+
+    <div class="used-letters">
+        Caractères frappés : <span id="used-letters-list">-</span>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
