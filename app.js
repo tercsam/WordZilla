@@ -1,6 +1,7 @@
 const dingSound = new Audio('Ding.mp3');
 const eraseSound = new Audio('Erase.mp3');
-const falseSound = new Audio('False.mp3'); // Nouveau son de tampon
+const falseSound = new Audio('False.mp3');
+const winSound = new Audio('Win.mp3'); // Ton son ASMR de victoire
 
 // Fonction pour jouer un son de frappe aléatoire entre Write1 et Write6
 function playRandomWriteSound() {
@@ -11,32 +12,21 @@ function playRandomWriteSound() {
 
 const wordBank = [
     'chat', 'chien', 'maison', 'arbre', 'soleil', 'livre', 'eau', 'lune', 'fleur', 'porte',
-'pizza', 'pomme', 'banane', 'riz', 'glace', 'café',
-'tigre', 'hibou', 'renard', 'panda', 'aigle',
-'rouge', 'bleu', 'vert', 'jaune', 'violet', 'noir', 'blanc', 'orange', 'rose', 'gris',
-'chaise', 'table', 'stylo', 'vélo', 'montre', 'lampe', 'clé', 'sac',
-'manger', 'courir', 'dormir', 'parler', 'lire', 'écrire', 'sauter', 'nager', 'jouer',
-'énigme', 'mirage',
-'ruban', 'papier', 'lettre', 'encre', 'texte',
-'levier', 'poésie', 'roman', 'auteur',
-'orage', 'plage', 'forêt', 'île', 'ciel',
-'étoile', 'ombre', 'nuage', 'vent', 'feu', 'glace', 'neige', 'arc',
-'code', 'secret', 'indice', 'clé',
-'balle', 'filet', 'golf', 'voile', 'vélo', 'course',
-'piano', 'chant', 'accord', 'note',
-'écran', 'souris', 'code', 'script',
-'voiture', 'camion', 'moto', 'vélo', 'bus', 'train', 'avion', 'bateau', 'frein',
-'verre', 'tasse', 'assiette', 'nappe', 'poêle',
-'sapin', 'rose', 'tulipe', 'lilas', 'lys',
-'lune', 'soleil', 'étoile', 'comète',
-'baleine', 'requin', 'dauphin', 'poisson', 'crabe', 'pieuvre', 'raie',
-'montre', 'bague', 'chapeau', 'gant',
-'café', 'thé', 'jus', 'eau', 'lait', 'soda', 'vin',
-'pomme', 'banane', 'orange', 'fraise', 'cerise', 'raisin', 'kiwi', 'mangue', 'melon',
-'pizza', 'burger', 'pâtes', 'riz', 'salade', 'soupe', 'tarte', 'gâteau', 'glace',
-'lettre', 'mot', 'phrase', 'texte', 'poème', 'roman', 'titre',
-'jeu', 'jouet', 'puzzle', 'cartes', 'dés', 'plateau', 'score'
- 
+    'pizza', 'pomme', 'banane', 'riz', 'glace', 'café', 'tigre', 'hibou', 'renard', 'panda', 'aigle',
+    'rouge', 'bleu', 'vert', 'jaune', 'violet', 'noir', 'blanc', 'orange', 'rose', 'gris',
+    'chaise', 'table', 'stylo', 'vélo', 'montre', 'lampe', 'clé', 'sac',
+    'manger', 'courir', 'dormir', 'parler', 'lire', 'écrire', 'sauter', 'nager', 'jouer',
+    'énigme', 'mirage', 'ruban', 'papier', 'lettre', 'encre', 'texte',
+    'levier', 'poésie', 'roman', 'auteur', 'orage', 'plage', 'forêt', 'île', 'ciel',
+    'étoile', 'ombre', 'nuage', 'vent', 'feu', 'neige', 'arc',
+    'code', 'secret', 'indice', 'balle', 'filet', 'golf', 'voile', 'course',
+    'piano', 'chant', 'accord', 'note', 'écran', 'souris', 'script',
+    'voiture', 'camion', 'moto', 'bus', 'train', 'avion', 'bateau', 'frein',
+    'verre', 'tasse', 'assiette', 'nappe', 'poêle', 'sapin', 'tulipe', 'lilas', 'lys',
+    'comète', 'baleine', 'requin', 'dauphin', 'poisson', 'crabe', 'pieuvre', 'raie',
+    'bague', 'chapeau', 'gant', 'thé', 'jus', 'lait', 'soda', 'vin',
+    'fraise', 'cerise', 'raisin', 'kiwi', 'mangue', 'melon', 'burger', 'pâtes', 'salade', 'soupe', 'tarte', 'gâteau',
+    'phrase', 'poème', 'titre', 'jouet', 'puzzle', 'cartes', 'dés', 'plateau', 'score'
 ];
 
 let word = "";
@@ -105,35 +95,26 @@ guessInput.addEventListener('input', (e) => {
 
     usedLetters.push(char);
 
-    // VÉRIFICATION DE LA LETTRE
     if (word.includes(char)) {
-        // --- CAS : BONNE LETTRE ---
-        playRandomWriteSound(); // Son de frappe classique
+        // Bonne lettre
+        playRandomWriteSound();
         for (let i = 0; i < word.length; i++) {
             if (word[i] === char) guessedWord[i] = char;
         }
         showMessage("CLAC !", "black");
-        
-        // Petite secousse de frappe normale
-        paper.classList.remove('hit');
-        void paper.offsetWidth; 
-        paper.classList.add('hit');
     } else {
-        // --- CAS : MAUVAISE LETTRE ---
+        // Mauvaise lettre (Tampon)
         attempts--;
-        
-        // On joue le son de tampon (False.mp3)
         const stampSound = falseSound.cloneNode();
         stampSound.volume = 0.8;
         stampSound.play().catch(() => {});
-        
         showMessage("BIP...", "var(--error-color)");
-
-        // Secousse un peu plus forte ou différente pour l'erreur
-        paper.classList.remove('hit');
-        void paper.offsetWidth; 
-        paper.classList.add('hit');
     }
+
+    // Effet visuel de frappe
+    paper.classList.remove('hit');
+    void paper.offsetWidth; 
+    paper.classList.add('hit');
 
     updateDisplay();
     checkWinLoss();
@@ -146,6 +127,10 @@ function showMessage(txt, color) {
 
 function checkWinLoss() {
     if (!guessedWord.includes('_')) {
+        // --- VICTOIRE ---
+        winSound.currentTime = 0;
+        winSound.play().catch(() => {});
+
         score++;
         if (score > bestScore) {
             bestScore = score;
@@ -154,6 +139,7 @@ function checkWinLoss() {
         showMessage(`PIÈCE FINIE : ${word.toUpperCase()}`, "var(--success-color)");
         endGame();
     } else if (attempts <= 0) {
+        // --- DÉFAITE ---
         score = 0;
         triggerLoseAnimation();
     }
