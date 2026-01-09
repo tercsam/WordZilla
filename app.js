@@ -1,12 +1,19 @@
 const dingSound = new Audio('Ding.mp3');
 const eraseSound = new Audio('Erase.mp3');
 const falseSound = new Audio('False.mp3');
-const winSound = new Audio('Win.mp3'); // Ton son ASMR de victoire
+const winSound = new Audio('Win.mp3');
 
-// Fonction pour jouer un son de frappe aléatoire entre Write1 et Write6
+// Réglage du volume de base (ASMR)
+dingSound.volume = 0.2;
+eraseSound.volume = 0.2;
+falseSound.volume = 0.1;
+winSound.volume = 0.1;
+
+// Fonction pour jouer un son de frappe aléatoire (ASMR)
 function playRandomWriteSound() {
     const randomIndex = Math.floor(Math.random() * 6) + 1;
     const sound = new Audio(`Write${randomIndex}.mp3`);
+    sound.volume = 0.25; // Volume très doux pour les touches
     sound.play().catch(() => {});
 }
 
@@ -96,22 +103,19 @@ guessInput.addEventListener('input', (e) => {
     usedLetters.push(char);
 
     if (word.includes(char)) {
-        // Bonne lettre
         playRandomWriteSound();
         for (let i = 0; i < word.length; i++) {
             if (word[i] === char) guessedWord[i] = char;
         }
         showMessage("CLAC !", "black");
     } else {
-        // Mauvaise lettre (Tampon)
         attempts--;
         const stampSound = falseSound.cloneNode();
-        stampSound.volume = 0.8;
+        stampSound.volume = 0.07; // Volume réduit pour le tampon
         stampSound.play().catch(() => {});
         showMessage("BIP...", "var(--error-color)");
     }
 
-    // Effet visuel de frappe
     paper.classList.remove('hit');
     void paper.offsetWidth; 
     paper.classList.add('hit');
@@ -127,8 +131,8 @@ function showMessage(txt, color) {
 
 function checkWinLoss() {
     if (!guessedWord.includes('_')) {
-        // --- VICTOIRE ---
         winSound.currentTime = 0;
+        winSound.volume = 0.07; // Volume doux pour la victoire
         winSound.play().catch(() => {});
 
         score++;
@@ -139,7 +143,6 @@ function checkWinLoss() {
         showMessage(`PIÈCE FINIE : ${word.toUpperCase()}`, "var(--success-color)");
         endGame();
     } else if (attempts <= 0) {
-        // --- DÉFAITE ---
         score = 0;
         triggerLoseAnimation();
     }
@@ -155,7 +158,7 @@ function triggerLoseAnimation() {
             wordDisplay.textContent = guessedWord.join(' ');
             
             const clickErase = eraseSound.cloneNode();
-            clickErase.volume = 0.6;
+            clickErase.volume = 0.10; // Très faible pour le mitraillage de touches
             clickErase.play().catch(() => {});
             
         } else {
@@ -172,6 +175,8 @@ function typeCorrectWord() {
 
     let typeInterval = setInterval(() => {
         wordDisplay.textContent += (i === 0 ? "" : " ") + word[i].toUpperCase();
+        
+        // On réutilise la fonction qui a déjà son volume réduit
         playRandomWriteSound();
 
         paper.classList.remove('hit');
