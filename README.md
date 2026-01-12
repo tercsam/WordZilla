@@ -1,7 +1,7 @@
 🦖 WordZilla
 WordZilla est une application web interactive et ludique centrée sur la manipulation des mots. Ce projet a été conçu pour offrir une expérience utilisateur fluide tout en mettant en pratique des concepts modernes de développement Front-End.
 
-📍 Démo en ligne : tercsam.github.io/WordZilla/
+📍 Démo en ligne : [tercsam.github.io/WordZilla/](https://tercsam.github.io/WordZilla/)
 
 🚀 Fonctionnalités
 Recherche dynamique : Trouvez des mots ou des définitions rapidement.
